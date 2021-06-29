@@ -14,7 +14,7 @@ export class CarouselComponent implements OnInit {
     
   }
 
-  tipoDeVenta = [
+  operation = [
     {string: "Compra"},{string: "Alquiler"},{string: "Ventanas"}
   ];
 
@@ -23,5 +23,10 @@ export class CarouselComponent implements OnInit {
     {image: "../assets/img/casa-moderna2.jpg"},
     {image: "../assets/img/casa-sencilla.jpg"}
   ];
+
+  /* For paint the operation in the carousel view */
+  public getOwnershipOperation(index: number) {
+    return this.operation[index].string;
+  }
 
 }
