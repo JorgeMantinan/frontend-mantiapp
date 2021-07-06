@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Owner } from './owner';
+import { OWNERS } from './owner.json';
 
 @Component({
   selector: 'app-owner',
@@ -8,13 +9,14 @@ import { Owner } from './owner';
 })
 export class OwnerComponent implements OnInit {
 
-  owners: Owner[] = [
-    { id: 1, name: 'David', lastname: 'Mantiñán', email: 'davidmanti92@gmail.com' }
-  ];
+  owners: Owner[];
 
   constructor() { }
 
   ngOnInit(): void {
+
+    this.owners = OWNERS;
+
   }
 
 }
