@@ -13,6 +13,7 @@ import { HttpClientModule } from '@angular/common/http';
 /* Angular Material */
 import { MatCarouselModule } from '@ngmodule/material-carousel';
 import { FooterComponent } from './footer/footer.component';
+import { OwnerComponent } from './owner/owner.component';
 
 
 @NgModule({
@@ -21,7 +22,8 @@ import { FooterComponent } from './footer/footer.component';
     HeaderComponent,
     OwnershipComponent,
     CarouselComponent,
-    FooterComponent
+    FooterComponent,
+    OwnerComponent
   ],
   imports: [
     BrowserModule,
