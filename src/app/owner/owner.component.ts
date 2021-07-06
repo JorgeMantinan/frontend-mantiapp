@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Owner } from './owner';
-import { OWNERS } from './owner.json';
+import { OwnerService } from './owner.service';
 
 @Component({
   selector: 'app-owner',
@@ -11,11 +11,11 @@ export class OwnerComponent implements OnInit {
 
   owners: Owner[];
 
-  constructor() { }
+  constructor( private ownerService: OwnerService) { }
 
   ngOnInit(): void {
 
-    this.owners = OWNERS;
+    this.owners = this.ownerService.getOwners();
 
   }
 

@@ -15,6 +15,9 @@ import { MatCarouselModule } from '@ngmodule/material-carousel';
 import { FooterComponent } from './footer/footer.component';
 import { OwnerComponent } from './owner/owner.component';
 
+/* Services */
+import { OwnerService } from './owner/owner.service';
+ 
 
 @NgModule({
   declarations: [
@@ -31,7 +34,7 @@ import { OwnerComponent } from './owner/owner.component';
     BrowserAnimationsModule,
     MatCarouselModule.forRoot()
   ],
-  providers: [],
+  providers: [OwnerService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
