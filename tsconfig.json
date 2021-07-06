@@ -25,6 +25,8 @@
     "enableI18nLegacyMessageIdFormat": false,
     "strictInjectionParameters": true,
     "strictInputAccessModifiers": true,
-    "strictTemplates": true
+    "strictTemplates": true,
+    /* added to resolve error "Property 'email' has no initializer and is not definitely assigned in the constructor."*/
+    "strictPropertyInitialization": false
   }
 }
