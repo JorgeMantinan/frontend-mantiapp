@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Subscriber } from 'rxjs';
 import { Owner } from './owner';
 import { OwnerService } from './owner.service';
 
@@ -15,7 +16,10 @@ export class OwnerComponent implements OnInit {
 
   ngOnInit(): void {
 
-    this.owners = this.ownerService.getOwners();
+    //sunscribe for make it Observable
+    this.ownerService.getOwners().subscribe(
+      owners => this.owners = owners
+    );
 
   }
 
