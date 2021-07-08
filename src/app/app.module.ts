@@ -9,6 +9,7 @@ import { CarouselComponent } from './carousel/carousel.component';
 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule } from '@angular/common/http';
+import { RouterModule, Routes } from '@angular/router';
 
 /* Angular Material */
 import { MatCarouselModule } from '@ngmodule/material-carousel';
@@ -18,6 +19,10 @@ import { OwnerComponent } from './owner/owner.component';
 /* Services */
 import { OwnerService } from './owner/owner.service';
  
+const routes: Routes = [
+  {path: '', redirectTo: '/ownership', pathMatch: 'full'},
+  {path: 'ownership', component: OwnershipComponent}
+];
 
 @NgModule({
   declarations: [
@@ -32,6 +37,7 @@ import { OwnerService } from './owner/owner.service';
     BrowserModule,
     HttpClientModule,
     BrowserAnimationsModule,
+    RouterModule.forRoot(routes),
     MatCarouselModule.forRoot()
   ],
   providers: [OwnerService],
