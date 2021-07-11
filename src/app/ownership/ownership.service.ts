@@ -27,4 +27,8 @@ export class OwnershipService {
     return this.http.post<Ownership>(this.urlEndPoint, ownership, {headers: this.httpHeaders});
   }
 
+  getOwnership(id: any): Observable<Ownership>{
+    return this.http.get<Ownership>(`${this.urlEndPoint}/${id}`)
+  }
+
 }

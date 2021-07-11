@@ -26,7 +26,8 @@ import { OwnershipService } from './ownership/ownership.service';
 const routes: Routes = [
   {path: '', redirectTo: '/ownership', pathMatch: 'full'},
   {path: 'ownership', component: OwnershipComponent},
-  {path: 'ownership/form', component: FormComponent}
+  {path: 'ownership/form', component: FormComponent},
+  {path: 'ownership/form/:id', component: FormComponent}
 ];
 
 @NgModule({

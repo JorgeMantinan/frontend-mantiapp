@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Ownership } from './ownership';
 import { OwnershipService } from './ownership.service';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-form',
@@ -14,12 +14,24 @@ export class FormComponent implements OnInit {
   public ownership: Ownership = new Ownership();
   title: string = "Crear inmueble";
 
-  constructor( private ownershipService: OwnershipService, private router: Router) { }
+  // ActivatedRoute for obtain the parameters
+  constructor( private ownershipService: OwnershipService, private router: Router,
+    private activatedRoute: ActivatedRoute) { }
 
   ngOnInit(): void {
+    this.loadOwnership();
   }
 
-  public create(): void{
+  loadOwnership(): void{
+    this.activatedRoute.params.subscribe(params => {
+      let id = params['id']
+      if(id){
+        this.ownershipService.getOwnership(id).subscribe( (ownership) => this.ownership = ownership)
+      }
+    })
+  }
+
+  public createOwnership(): void{
     this.ownershipService.createOwnership(this.ownership).subscribe(
       response => this.router.navigate(['/ownership'])
     )
