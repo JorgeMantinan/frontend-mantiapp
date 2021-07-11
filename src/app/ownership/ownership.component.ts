@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Ownership } from './ownership';
+import { OwnershipService } from './ownership.service';
 
 @Component({
   selector: 'app-ownership',
@@ -6,10 +8,18 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./ownership.component.sass']
 })
 export class OwnershipComponent implements OnInit {
+  //public ownership: Ownership = new Ownership();
+  ownerships: Ownership[] = [];
 
-  constructor() { }
+  constructor( private ownershipService: OwnershipService) { }
 
   ngOnInit(): void {
+
+    //subscribe for make it Observable
+    this.ownershipService.getOwnerships().subscribe(
+      ownerships => this.ownerships = ownerships
+    );
+
   }
 
 }

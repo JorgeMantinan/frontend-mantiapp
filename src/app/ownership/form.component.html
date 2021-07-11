@@ -1,0 +1,48 @@
+<div class="card bg-dark text-white">
+    <div class="card-header">{{ title }}</div>
+    <div class="card-body">
+        <!-- Invocation to method create -->
+        <form (ngSubmit)= "create()">
+            <div class="form-group row">
+                <label for="operation" class="col-form-label col-sm-2"></label>
+                <div class="col-sm-6">
+                    <input type="text" class="form-control" [(ngModel)]="ownership.operation" name="operation">
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label for="kindOwnership" class="col-form-label col-sm-2"></label>
+                <div class="col-sm-6">
+                    <input type="text" class="form-control" [(ngModel)]="ownership.kindOwnership" name="kindOwnership">
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label for="bedrooms" class="col-form-label col-sm-2"></label>
+                <div class="col-sm-6">
+                    <input type="number" class="form-control" [(ngModel)]="ownership.bedrooms" name="bedrooms">
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label for="price" class="col-form-label col-sm-2"></label>
+                <div class="col-sm-6">
+                    <input type="number" class="form-control" [(ngModel)]="ownership.price" name="price">
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label for="zone" class="col-form-label col-sm-2"></label>
+                <div class="col-sm-6">
+                    <input type="text" class="form-control" [(ngModel)]="ownership.zone" name="zone">
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <div class="col-sm-6">
+                    <button class="btn btn-primary" role="button">Crear</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
