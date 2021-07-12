@@ -3,7 +3,7 @@ import { Ownership } from './ownership';
 // Is used for make objects string for use like Observable manage for big data
 // Observable is for change so fast the data
 import { Observable, of } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { catchError, map } from 'rxjs/operators';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 @Injectable({
@@ -38,6 +38,17 @@ export class OwnershipService {
 
   deleteOwnership(id: number): Observable<Ownership>{
     return this.http.delete<Ownership>(`${this.urlEndPoint}/${id}`, {headers: this.httpHeaders})
+  }
+
+  uploadPhoto(file: File, id: any): Observable<Ownership>{
+    let formData = new FormData();
+    // The name have to be the same of @RequestParam("file") of backend
+    formData.append("file", file);
+    formData.append("id",id);
+    // get the file of backend and convert to ownership
+    return this.http.post(`${this.urlEndPoint}/upload`, formData).pipe(
+      map((response: any) => response.ownership as Ownership)
+    );
   }
 
 

@@ -15,8 +15,8 @@
     <article *ngFor="let ownership of ownerships"
         class="border border-2 border-black rounded col-3 mx-5 mt-5 text-center pt-4 justify-content-center shadow  mb-5 rounded"
         style="background-color: #f3f3f3;">
-        <img src="../assets/img/casa-moderna.jpg" alt=""
-            class="border border-2 shadow-sm p-1 bg-body rounded imgOwnership">
+        <img *ngIf="ownership?.photo" src="http://localhost:8080/api/uploads/img/{{ownership.photo}}" alt="{{ownership.photo}}" class="border border-2 shadow-sm p-1 bg-body rounded imgOwnership">
+
         <div class="m-4 text-start">
             <ul class="list-group border border-2">
                 <li class="list-group-item">
@@ -50,6 +50,7 @@
                     </div>
                 </li>
             </ul>
+            <button type="button" name="button" [routerLink]="['/ownership/detail', ownership.id]" class="btn btn-rounded border-2 border-dark" style="background-color: #d1aeff;">Subir foto</button>
             <button type="button" name="button" [routerLink]="['/ownership/form', ownership.id]" class="btn btn-rounded border-2 border-dark mx-2" style="background-color: #cfcfcf;">Editar</button>
             <button type="button" name="button" (click)='deleteOwnership(ownership)' class="btn btn-rounded border-2 border-dark" style="background-color: #ff6464;">Borrar</button>
         </div>

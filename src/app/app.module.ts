@@ -21,13 +21,15 @@ import { FooterComponent } from './footer/footer.component';
 /* Services */
 import { OwnerService } from './owner/owner.service';
 import { OwnershipService } from './ownership/ownership.service';
+import { DetailComponent } from './ownership/detail/detail.component';
 
  
 const routes: Routes = [
   {path: '', redirectTo: '/ownership', pathMatch: 'full'},
   {path: 'ownership', component: OwnershipComponent},
   {path: 'ownership/form', component: FormComponent},
-  {path: 'ownership/form/:id', component: FormComponent}
+  {path: 'ownership/form/:id', component: FormComponent},
+  {path: 'ownership/detail/:id', component: DetailComponent}
 ];
 
 @NgModule({
@@ -38,7 +40,8 @@ const routes: Routes = [
     CarouselComponent,
     FooterComponent,
     OwnerComponent,
-    FormComponent
+    FormComponent,
+    DetailComponent
   ],
   imports: [
     FormsModule,
