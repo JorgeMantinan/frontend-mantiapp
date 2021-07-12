@@ -12,7 +12,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 export class OwnershipService {
 
   private urlEndPoint: string = 'http://localhost:8080/api/ownership';
-  private httpHeaders = new HttpHeaders({'Content-Type': 'application-json'})
+  private httpHeaders = new HttpHeaders({'Content-Type': 'application/json'})
 
   constructor(private http: HttpClient) { }
 
