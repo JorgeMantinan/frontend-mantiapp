@@ -2,7 +2,7 @@
     <div class="card-header">{{ title }}</div>
     <div class="card-body">
         <!-- Invocation to method create -->
-        <form (ngSubmit)= "createOwnership()">
+        <form>
             <div class="form-group row">
                 <label for="operation" class="col-form-label col-sm-2"></label>
                 <div class="col-sm-6">
@@ -40,7 +40,11 @@
 
             <div class="form-group row">
                 <div class="col-sm-6">
-                    <button class="btn btn-primary" role="button">Crear</button>
+                    <button class="btn btn-primary" role="button" (click)='createOwnership()' *ngIf="!ownership.id else elseBlock">Crear</button>
+                    <ng-template #elseBlock>
+                        <button class="btn btn-primary" role="button" (click)='updateOwnership()'>Editar</button>
+                    </ng-template>
+                    
                 </div>
             </div>
         </form>

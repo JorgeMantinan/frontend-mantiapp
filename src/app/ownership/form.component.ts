@@ -35,7 +35,14 @@ export class FormComponent implements OnInit {
     this.ownershipService.createOwnership(this.ownership).subscribe(
       response => this.router.navigate(['/ownership'])
     )
+  }
 
+  public updateOwnership(): void{
+    this.ownershipService.updateOwnership(this.ownership).subscribe(
+      ownership => {
+        this.router.navigate(['/ownership'])
+      }
+    )
   }
 
 }

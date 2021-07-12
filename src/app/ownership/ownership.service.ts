@@ -31,4 +31,10 @@ export class OwnershipService {
     return this.http.get<Ownership>(`${this.urlEndPoint}/${id}`)
   }
 
+  // The second parameter is for get all data of ownership for update
+  updateOwnership(ownership: Ownership): Observable<Ownership>{
+    return this.http.put<Ownership>(`${this.urlEndPoint}/${ownership.id}`, ownership, {headers: this.httpHeaders})
+  }
+
+
 }
