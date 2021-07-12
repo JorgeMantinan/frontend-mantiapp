@@ -36,5 +36,9 @@ export class OwnershipService {
     return this.http.put<Ownership>(`${this.urlEndPoint}/${ownership.id}`, ownership, {headers: this.httpHeaders})
   }
 
+  deleteOwnership(id: number): Observable<Ownership>{
+    return this.http.delete<Ownership>(`${this.urlEndPoint}/${id}`, {headers: this.httpHeaders})
+  }
+
 
 }

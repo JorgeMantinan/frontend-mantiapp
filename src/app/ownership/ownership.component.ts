@@ -22,4 +22,14 @@ export class OwnershipComponent implements OnInit {
 
   }
 
+  deleteOwnership(ownership: Ownership): void{
+    this.ownershipService.deleteOwnership(ownership.id).subscribe(
+      response => {
+        //Filter is used to get only the elements that we want and return in a new array
+        //that remove of the list at the ownership deleted
+        this.ownerships = this.ownerships.filter(ownship => ownship !== ownership)
+      }
+    )
+  }
+
 }
