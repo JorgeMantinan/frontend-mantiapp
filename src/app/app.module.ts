@@ -9,6 +9,9 @@ import { HeaderComponent } from './header/header.component';
 import { OwnerComponent } from './owner/owner.component';
 import { OwnershipComponent } from './ownership/ownership.component';
 import { CarouselComponent } from './carousel/carousel.component';
+import { DetailComponent } from './ownership/detail/detail.component';
+import { LoginComponent } from './owner/login.component';
+import { FooterComponent } from './footer/footer.component';
 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule } from '@angular/common/http';
@@ -16,20 +19,18 @@ import { RouterModule, Routes } from '@angular/router';
 
 /* Angular Material */
 import { MatCarouselModule } from '@ngmodule/material-carousel';
-import { FooterComponent } from './footer/footer.component';
 
 /* Services */
 import { OwnerService } from './owner/owner.service';
 import { OwnershipService } from './ownership/ownership.service';
-import { DetailComponent } from './ownership/detail/detail.component';
-
  
 const routes: Routes = [
   {path: '', redirectTo: '/ownership', pathMatch: 'full'},
   {path: 'ownership', component: OwnershipComponent},
   {path: 'ownership/form', component: FormComponent},
   {path: 'ownership/form/:id', component: FormComponent},
-  {path: 'ownership/detail/:id', component: DetailComponent}
+  {path: 'ownership/detail/:id', component: DetailComponent},
+  {path: 'login', component: LoginComponent}
 ];
 
 @NgModule({
@@ -41,7 +42,8 @@ const routes: Routes = [
     FooterComponent,
     OwnerComponent,
     FormComponent,
-    DetailComponent
+    DetailComponent,
+    LoginComponent
   ],
   imports: [
     FormsModule,

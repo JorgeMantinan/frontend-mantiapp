@@ -1,3 +1,6 @@
+<app-header></app-header>
+<app-carousel></app-carousel>
+<div class="imgBackground">
 <section class="row mx-5 justify-content-between">
     <!-- <div *ngFor >
         <article>
@@ -7,11 +10,6 @@
     <div class="my-2 text-left">
         <button class="btn btn-rounded border-2 border-dark" style="background-color: #cfcfcf;" type="button" [routerLink]="['/ownership/form']">Crear imbueble</button>
     </div>
-    
-    <!-- TODO Put this in each article 
-    <button type="button" name="button" [routerLink]="['/ownership/form', ownership.id]" class="btn btn-rounded border-2 border-dark" style="background-color: #cfcfcf;">Editar</button>
-    -->
-    
     <article *ngFor="let ownership of ownerships"
         class="border border-2 border-black rounded col-3 mx-5 mt-5 text-center pt-4 justify-content-center shadow  mb-5 rounded"
         style="background-color: #f3f3f3;">
@@ -56,3 +54,4 @@
         </div>
     </article>
 </section>
+</div>

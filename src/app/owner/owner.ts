@@ -9,9 +9,7 @@ export class Owner {
     id: number;
     name: string;
     lastname: string;
+    password: string;
     email: string;
-    //role: Role;
-    //roles: Role[] = [];
-    //permissions: Permission[] = [];
-    //login: Login;
+    roles: string [] = [];
 }
