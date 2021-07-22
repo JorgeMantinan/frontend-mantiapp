@@ -27,8 +27,8 @@ export class AuthService {
   public get token(): string{
     if (this._token != null) {
       return this._token;
-    } else if (this._token == null && localStorage.getItem('token') != null) {
-      this._token = JSON.parse(localStorage.getItem('token')!) as string;
+    } else if (this._token == null && sessionStorage.getItem('token') != null) {
+      this._token = JSON.parse(sessionStorage.getItem('token')!) as string;
       return this._token;
     }
     return null!;
