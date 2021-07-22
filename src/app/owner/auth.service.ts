@@ -8,7 +8,31 @@ import { Owner } from './owner';
 })
 export class AuthService {
 
+  private _owner: Owner;
+  // tslint:disable-next-line: variable-name
+  private _token: string;
+
   constructor(private http: HttpClient) { }
+
+  public get owner(): Owner{
+    if(this._owner != null){
+      return this._owner;
+    } else if (this._owner == null && sessionStorage.getItem('owner') != null){
+      this._owner = JSON.parse(sessionStorage.getItem('owner')!) as Owner;
+      return this._owner;
+    }
+    return new Owner();
+  }
+
+  public get token(): string{
+    if (this._token != null) {
+      return this._token;
+    } else if (this._token == null && localStorage.getItem('token') != null) {
+      this._token = JSON.parse(localStorage.getItem('token')!) as string;
+      return this._token;
+    }
+    return null!;
+  }
 
   login(owner: Owner):Observable<any>{
     const urlEndPoint = 'http://localhost:8080/oauth/token';
@@ -24,6 +48,29 @@ export class AuthService {
     params.set('password',owner.password);
 
     return this.http.post<any>(urlEndPoint, params.toString() ,{headers: httpHeaders});
+  }
+
+
+  saveOwner(accessToken: string): void{
+    let payload = this.getPayload(accessToken);
+    this._owner = new Owner();
+    this._owner.name = payload.owner_name;
+    this._owner.lastname = payload.owner_lastname;
+    this._owner.email = payload.owner_email;
+    this._owner.roles = payload.authorities;
+    sessionStorage.setItem('owner',JSON.stringify(this._owner));
+  }
+
+  saveToken(accessToken: string): void{
+    this._token = accessToken;
+    sessionStorage.setItem('token', accessToken);
+  }
+
+  getPayload(accessToken: string):any{
+    if(accessToken != null){
+      return JSON.parse(atob(accessToken.split(".")[1]));
+    }
+    return null;
   }
 
 }

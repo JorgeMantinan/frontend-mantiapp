@@ -29,12 +29,16 @@ export class LoginComponent implements OnInit {
     }
 
     this.authService.login(this.owner).subscribe(response => {
-      let payload = JSON.parse(atob(response.access_token.split(".")[1]));
+      this.authService.saveOwner(response.access_token);
+      this.authService.saveToken(response.access_token);
+      let owner = this.authService.owner;
       this.router.navigate(['/ownership'])
-      console.log(payload);
-      Swal.fire('Sesion iniciada',`Bienvenido ${payload.owner_name}, has iniciado sesión con éxito.`);
+      Swal.fire('Sesion iniciada',`Bienvenido ${owner.name}, has iniciado sesión con éxito.`);
+    }, err => {
+      if(err.status == 400){
+        Swal.fire('Error al iniciar sesión', 'Usuario o contraseña incorrectos', 'error');
+      }
     });
-
   }
 
 }
