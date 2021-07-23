@@ -19,10 +19,13 @@ export class LoginComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    if(this.authService.isAuthenticated()){
+      Swal.fire('Inicio de sesión',`Bienvenido ${this.authService.owner.name} ya estas logueado.`, 'info');
+      this.router.navigate(['/ownership']);
+    }
   }
 
   login(): void {
-    console.log(this.owner);
     if(this.owner.email == null || this.owner.password == null){
       Swal.fire("Error al iniciar sesión", 'Usuario y/o contraseña vacíos', 'error');
       return;

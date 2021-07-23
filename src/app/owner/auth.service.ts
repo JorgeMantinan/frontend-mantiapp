@@ -9,7 +9,6 @@ import { Owner } from './owner';
 export class AuthService {
 
   private _owner: Owner;
-  // tslint:disable-next-line: variable-name
   private _token: string;
 
   constructor(private http: HttpClient) { }
@@ -18,20 +17,21 @@ export class AuthService {
     if(this._owner != null){
       return this._owner;
     } else if (this._owner == null && sessionStorage.getItem('owner') != null){
-      this._owner = JSON.parse(sessionStorage.getItem('owner')!) as Owner;
+      this._owner = JSON.parse(sessionStorage.getItem('owner')) as Owner;
       return this._owner;
     }
     return new Owner();
   }
 
-  public get token(): string{
+  public get token(): string | null{
     if (this._token != null) {
       return this._token;
     } else if (this._token == null && sessionStorage.getItem('token') != null) {
-      this._token = JSON.parse(sessionStorage.getItem('token')!) as string;
+      this._token = sessionStorage.getItem('token') as string;
       return this._token;
+    } else {
+      return null;
     }
-    return null!;
   }
 
   login(owner: Owner):Observable<any>{
@@ -71,6 +71,14 @@ export class AuthService {
       return JSON.parse(atob(accessToken.split(".")[1]));
     }
     return null;
+  }
+
+  isAuthenticated(): boolean{
+    let payload = this.getPayload(this.token);
+    if(payload != null && payload.owner_name && payload.owner_name > 0){
+      return true;
+    }
+    return false;
   }
 
 }
