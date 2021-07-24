@@ -26,12 +26,14 @@ export class LoginComponent implements OnInit {
   }
 
   login(): void {
+    console.log(this.owner);
     if(this.owner.email == null || this.owner.password == null){
       Swal.fire("Error al iniciar sesión", 'Usuario y/o contraseña vacíos', 'error');
       return;
     }
 
     this.authService.login(this.owner).subscribe(response => {
+      console.log(response.accesstoken);
       this.authService.saveOwner(response.access_token);
       this.authService.saveToken(response.access_token);
       let owner = this.authService.owner;

@@ -15,9 +15,11 @@ export class AuthService {
 
   public get owner(): Owner{
     if(this._owner != null){
+      console.log('_owner != get owner: ' + this._owner.email);
       return this._owner;
     } else if (this._owner == null && sessionStorage.getItem('owner') != null){
-      this._owner = JSON.parse(sessionStorage.getItem('owner')) as Owner;
+      this._owner = JSON.parse(sessionStorage.getItem('owner')!) as Owner;
+      console.log('this._owner: ' + this._owner);
       return this._owner;
     }
     return new Owner();
@@ -74,8 +76,9 @@ export class AuthService {
   }
 
   isAuthenticated(): boolean{
-    let payload = this.getPayload(this.token);
-    if(payload != null && payload.owner_name && payload.owner_name > 0){
+    let payload = this.getPayload(this.token!);
+    //TODO Validation email ***@***.***
+    if(payload !== null && payload.owner_email && payload.owner_email != ''){
       return true;
     }
     return false;
