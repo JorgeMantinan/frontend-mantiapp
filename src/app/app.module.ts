@@ -29,7 +29,6 @@ const routes: Routes = [
   {path: 'ownership', component: OwnershipComponent},
   {path: 'ownership/form', component: FormComponent},
   {path: 'ownership/form/:id', component: FormComponent},
-  {path: 'ownership/detail/:id', component: DetailComponent},
   {path: 'login', component: LoginComponent}
 ];
 

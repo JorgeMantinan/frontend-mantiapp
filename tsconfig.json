@@ -7,6 +7,8 @@
     "forceConsistentCasingInFileNames": true,
     "strict": true,
     "noImplicitReturns": true,
+    //For error => Parameter 'event' implicitly has an 'any' type (detail.component.ts)
+    "noImplicitAny": false,
     "noFallthroughCasesInSwitch": true,
     "sourceMap": true,
     "declaration": false,
@@ -26,7 +28,7 @@
     "strictInjectionParameters": true,
     "strictInputAccessModifiers": true,
     "strictTemplates": true,
-    /* added to resolve error "Property 'email' has no initializer and is not definitely assigned in the constructor."*/
+    /* added to resolve error "Property 'var' has no initializer and is not definitely assigned in the constructor."*/
     "strictPropertyInitialization": false
   }
 }

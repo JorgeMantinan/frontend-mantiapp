@@ -4,9 +4,10 @@ import { Ownership } from './ownership';
 // Observable is for change so fast the data
 import { Observable, of, throwError } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpEvent, HttpHeaders, HttpRequest } from '@angular/common/http';
 import { Router } from '@angular/router';
 import Swal from 'sweetalert2';
+import { AuthService } from '../owner/auth.service';
 
 @Injectable({
   providedIn: 'root'
@@ -16,7 +17,15 @@ export class OwnershipService {
   private urlEndPoint: string = 'http://localhost:8080/api/ownership';
   private httpHeaders = new HttpHeaders({'Content-Type': 'application/json'})
 
-  constructor(private http: HttpClient, private router: Router) { }
+  constructor(private authService: AuthService, private http: HttpClient, private router: Router) { }
+
+  private addAuthorizationHeader(){
+    let token = this.authService.token;
+    if(token != null){
+      return this.httpHeaders.append('Authorization','Bearer ' + token);
+    }
+    return this.httpHeaders;
+  }
 
   private notAuthorized(e: any): boolean {
     if(e.status == 401 || e.status == 403){
@@ -34,7 +43,7 @@ export class OwnershipService {
 
   createOwnership(ownership: Ownership) : Observable<Ownership> {
     // This send the url, the object and the header
-    return this.http.post<Ownership>(this.urlEndPoint, ownership, {headers: this.httpHeaders})
+    return this.http.post<Ownership>(this.urlEndPoint, ownership, {headers: this.addAuthorizationHeader()})
     .pipe(
       map((response: any) => response.ownership as Ownership),
       catchError( e => {
@@ -56,7 +65,7 @@ export class OwnershipService {
 
   // The second parameter is for get all data of ownership for update
   updateOwnership(ownership: Ownership): Observable<Ownership>{
-    return this.http.put<Ownership>(`${this.urlEndPoint}/${ownership.id}`, ownership, {headers: this.httpHeaders})
+    return this.http.put<Ownership>(`${this.urlEndPoint}/${ownership.id}`, ownership, {headers: this.addAuthorizationHeader()})
     .pipe(
       catchError( e => {
         if(this.notAuthorized(e)){
@@ -69,7 +78,7 @@ export class OwnershipService {
   }
 
   deleteOwnership(id: number): Observable<Ownership>{
-    return this.http.delete<Ownership>(`${this.urlEndPoint}/${id}`, {headers: this.httpHeaders})
+    return this.http.delete<Ownership>(`${this.urlEndPoint}/${id}`, {headers: this.addAuthorizationHeader()})
     .pipe(
       catchError( e => {
         if(this.notAuthorized(e)){
@@ -81,25 +90,24 @@ export class OwnershipService {
     );
   }
 
-  uploadPhoto(file: File, id: any): Observable<Ownership>{
+  uploadPhoto(file: File, id: any): Observable<HttpEvent<{}>>{
     let formData = new FormData();
     // The name have to be the same of @RequestParam("file") of backend
     formData.append("file", file);
     formData.append("id",id);
-    // get the file of backend and convert to ownership
-    return this.http.post(`${this.urlEndPoint}/upload`, formData).pipe(
-      map((response: any) => response.ownership as Ownership),
-      catchError( e => {
-        if(this.notAuthorized(e)){
-          return throwError(e);
-        }
-        if (e.status = 400) {
-          return throwError(e);
-        }
-        Swal.fire(e.error.message, e.error.error, 'error');
-        return throwError(e);
-      })
-    );
+
+    let httpHeaders = new HttpHeaders();
+    let token = this.authService.token;
+    if(token != null){
+      httpHeaders = httpHeaders.append('Authorization', 'Bearer ' + token);
+    }
+
+    const req = new HttpRequest('POST', `${this.urlEndPoint}/upload`, formData, {
+      reportProgress: true,
+      headers: httpHeaders
+    });
+
+    return this.http.request(req);
   }
 
 

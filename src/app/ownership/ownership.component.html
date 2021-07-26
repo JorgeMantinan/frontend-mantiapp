@@ -1,3 +1,4 @@
+<ownership-detail *ngIf="selectedOwnership" [ownership]="selectedOwnership"></ownership-detail>
 <app-header></app-header>
 <app-carousel></app-carousel>
 <div class="imgBackground">
@@ -48,7 +49,7 @@
                     </div>
                 </li>
             </ul>
-            <button type="button" name="button" [routerLink]="['/ownership/detail', ownership.id]" class="btn btn-rounded border-2 border-dark" style="background-color: #d1aeff;">Subir foto</button>
+            <button type="button" name="button" (click)="openModal(ownership)" class="btn btn-rounded border-2 border-dark" style="background-color: #d1aeff;">Subir foto</button>
             <button type="button" name="button" [routerLink]="['/ownership/form', ownership.id]" class="btn btn-rounded border-2 border-dark mx-2" style="background-color: #cfcfcf;">Editar</button>
             <button type="button" name="button" (click)='deleteOwnership(ownership)' class="btn btn-rounded border-2 border-dark" style="background-color: #ff6464;">Borrar</button>
         </div>

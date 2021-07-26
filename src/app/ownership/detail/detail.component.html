@@ -1,25 +1,46 @@
-<div class="card bg-dark text-white">
-    <div class="card-header">{{ title }}</div>
-    <div class="card-body">
-        <div class="container">
-            <div class="row">
-                <div class="col-sm">
-                    <ul *ngIf="ownership" class="list-group text-dark mb-3">
-                        <li class="list-group-item">{{ ownership.operation }}</li>
-                        <li class="list-group-item">{{ ownership.kindOwnership }}</li>
-                        <li class="list-group-item">{{ ownership.bedrooms }}</li>
-                        <li class="list-group-item">{{ ownership.zone }}</li>
-                        <li class="list-group-item">{{ ownership.price }} $</li>
-                    </ul>
-                    <div class="input-group">
-                        <input (change)="selectPhoto($event)" type="file" class="form-control" id="inputGroupFile04" aria-describedby="inputGroupFileAddon04" aria-label="Seleccionar foto">
-                        <button (click)="uploadPhoto()" class="btn btn-outline-secondary" type="button" id="inputGroupFileAddon04">Subir foto</button>
-                      </div>
-                </div>
-                <div class="col-sm">
-                    <img *ngIf="ownership?.photo" src="http://localhost:8080/api/uploads/img/{{ownership.photo}}" alt="{{ownership.photo}}" class="img-thumbnail rounded" >
+<div *ngIf="modalService.modal" class="open-modal animation-modal-background fadeIn">
+<div class="modal" tabindex="-1" style="display: block;">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">{{ title }}</h5>
+          <button type="button" (click)="closeModal()" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm">
+                        <ul *ngIf="ownership" class="list-group text-dark mb-3">
+                            <li class="list-group-item">{{ ownership.operation }}</li>
+                            <li class="list-group-item">{{ ownership.kindOwnership }}</li>
+                            <li class="list-group-item">{{ ownership.bedrooms }}</li>
+                            <li class="list-group-item">{{ ownership.zone }}</li>
+                            <li class="list-group-item">{{ ownership.price }} $</li>
+                        </ul>
+                        <div class="input-group">
+                            <input (change)="selectPhoto($event)" type="file" class="form-control" id="inputGroupFile04"
+                                aria-describedby="inputGroupFileAddon04" aria-label="Seleccionar foto">
+                            <button (click)="uploadPhoto()" class="btn btn-outline-secondary" type="button"
+                                id="inputGroupFileAddon04">Subir foto</button>
+                        </div>
+                        <div *ngIf="progress > 0" class="progress">
+                            <!-- attr. for put a attribute in aria-valuenow -->
+                            <div class="progress-bar progress-bar-striped" role="progressbar" [ngStyle]="{width:progress+'%'}" attr.aria-valuenow="{{ progress }}" aria-valuemin="0" aria-valuemax="100">
+                                {{progress}}%
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm">
+                        <img *ngIf="ownership?.photo" src="http://localhost:8080/api/uploads/img/{{ownership.photo}}"
+                            alt="{{ownership.photo}}" class="img-thumbnail rounded">
+                    </div>
                 </div>
             </div>
         </div>
+        <div class="modal-footer">
+          <button type="button" (click)="closeModal()" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        </div>
+      </div>
     </div>
+  </div>
 </div>
